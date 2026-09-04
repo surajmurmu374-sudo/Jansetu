@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>JANSETU | Collaborative Problem Solving</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f7f9fc;
+      color: #1f2937;
+    }
+
+    /* NAVBAR */
+    nav {
+      height: 70px;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 8%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #dc2626;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+    }
+
+    .login-btn {
+      background: #dc2626;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 70px 10%;
+      background: linear-gradient(135deg, #fff, #fff1f2);
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .hero h1 span {
+      color: #dc2626;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #6b7280;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .primary {
+      background: #dc2626;
+      color: white;
+    }
+
+    .secondary {
+      background: white;
+      color: #dc2626;
+      border: 1px solid #dc2626;
+    }
+
+    .hero-card {
+      background: white;
+      width: 330px;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 20px;
+    }
+
+    .mini-problem {
+      background: #f9fafb;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      border-left: 4px solid #dc2626;
+    }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 50px 10%;
+      gap: 20px;
+      background: white;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 25px;
+    }
+
+    .stat-card h2 {
+      color: #dc2626;
+      font-size: 32px;
+    }
+
+    /* HOW IT WORKS */
+    .section {
+      padding: 80px 10%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #6b7280;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+    }
+
+    .step-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: #fee2e2;
+      color: #dc2626;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* PROBLEMS */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .problem-card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    }
+
+    .tag {
+      display: inline-block;
+      background: #fee2e2;
+      color: #dc2626;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .problem-card h3 {
+      margin-bottom: 12px;
+    }
+
+    .problem-card p {
+      color: #6b7280;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .problem-footer {
+      display: flex;
+      justify-content: space-between;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    /* FORM */
+    .form-section {
+      background: #fff1f2;
+    }
+
+    .form-container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    textarea {
+      height: 120px;
+      resize: none;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      padding: 15px;
+      background: #dc2626;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width: 900px) {
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      .stats,
+      .steps,
+      .problem-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      nav ul {
+        display: none;
+      }
+    }
+
+    @media(max-width: 600px) {
+
+      .stats,
+      .steps,
+      .problem-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 50px 7%;
+      }
+
+      .section {
+        padding: 60px 7%;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .hero-card {
+        width: 100%;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+  <div class="logo">JANSETU</div>
+
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#problems">Problems</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#submit">Submit Problem</a></li>
+  </ul>
+
+  <a href="#submit" class="login-btn">Join Platform</a>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+  <div class="hero-text">
+
+    <h1>
+      Solve Local Problems.
+      <span>Create Real Impact.</span>
+    </h1>
+
+    <p>
+      Jansetu connects citizens, students, universities and industries
+      to collaboratively solve real-world challenges.
+    </p>
+
+    <a href="#submit" class="btn primary">
+      Submit a Problem
+    </a>
+
+    <a href="#problems" class="btn secondary">
+      Explore Challenges
+    </a>
+
+  </div>
+
+
+  <div class="hero-card">
+
+    <h3>🔥 Active Challenges</h3>
+
+    <div class="mini-problem">
+      💧 Water Management<br>
+      <small>Ranchi, Jharkhand</small>
+    </div>
+
+    <div class="mini-problem">
+      🌾 Smart Agriculture<br>
+      <small>Dumka, Jharkhand</small>
+    </div>
+
+    <div class="mini-problem">
+      🏥 Rural Healthcare<br>
+      <small>Bokaro, Jharkhand</small>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+  <div class="stat-card">
+    <h2>250+</h2>
+    <p>Problems Submitted</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>500+</h2>
+    <p>Students</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>30+</h2>
+    <p>Universities</p>
+  </div>
+
+  <div class="stat-card">
+    <h2>45+</h2>
+    <p>Solutions Created</p>
+  </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+  <div class="section-title">
+    <h2>How It Works</h2>
+    <p>From local problems to innovative solutions.</p>
+  </div>
+
+
+  <div class="steps">
+
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <h3>Submit Problem</h3>
+      <p>Citizens submit real challenges from their community.</p>
+    </div>
+
+
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <h3>Explore</h3>
+      <p>Students and universities explore verified challenges.</p>
+    </div>
+
+
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <h3>Collaborate</h3>
+      <p>Teams work with mentors and industry experts.</p>
+    </div>
+
+
+    <div class="step-card">
+      <div class="step-number">4</div>
+      <h3>Create Impact</h3>
+      <p>Innovative solutions are implemented in communities.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROBLEMS -->
+
+<section class="section" id="problems">
+
+  <div class="section-title">
+    <h2>Explore Challenges</h2>
+    <p>Discover problems waiting for innovative solutions.</p>
+  </div>
+
+
+  <div class="problem-grid">
+
+    <div class="problem-card">
+
+      <span class="tag">Water Management</span>
+
+      <h3>Water Shortage in Rural Areas</h3>
+
+      <p>
+        Communities face difficulties accessing clean and
+        sustainable water resources.
+      </p>
+
+      <div class="problem-footer">
+        <span>📍 Ranchi</span>
+        <span>🔴 High Priority</span>
+      </div>
+
+    </div>
+
+
+    <div class="problem-card">
+
+      <span class="tag">Agriculture</span>
+
+      <h3>Smart Farming Solutions</h3>
+
+      <p>
+        Farmers need affordable technology for improving
+        crop productivity.
+      </p>
+
+      <div class="problem-footer">
+        <span>📍 Dumka</span>
+        <span>🟠 Medium Priority</span>
+      </div>
+
+    </div>
+
+
+    <div class="problem-card">
+
+      <span class="tag">Education</span>
+
+      <h3>Digital Learning Access</h3>
+
+      <p>
+        Rural students need better access to quality
+        educational resources.
+      </p>
+
+      <div class="problem-footer">
+        <span>📍 Jamshedpur</span>
+        <span>🔴 High Priority</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SUBMIT PROBLEM -->
+
+<section class="section form-section" id="submit">
+
+  <div class="section-title">
+    <h2>Submit a Problem</h2>
+    <p>Your challenge could inspire the next big solution.</p>
+  </div>
+
+
+  <div class="form-container">
+
+    <form id="problemForm">
+
+      <label>Problem Title</label>
+
+      <input
+        type="text"
+        id="title"
+        placeholder="Enter problem title"
+        required
+      >
+
+
+      <label>Category</label>
+
+      <select id="category">
+
+        <option>Education</option>
+        <option>Healthcare</option>
+        <option>Agriculture</option>
+        <option>Water Management</option>
+        <option>Sanitation</option>
+        <option>Environment</option>
+        <option>Infrastructure</option>
+
+      </select>
+
+
+      <label>Location</label>
+
+      <input
+        type="text"
+        id="location"
+        placeholder="Enter city or district"
+        required
+      >
+
+
+      <label>Problem Description</label>
+
+      <textarea
+        id="description"
+        placeholder="Describe the problem..."
+        required
+      ></textarea>
+
+
+      <button type="submit">
+        Submit Problem 🚀
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <h3>JanSolve</h3>
+
+  <p>
+    Connecting Communities • Universities • Industries
+  </p>
+
+  <br>
+
+  <p>
+    © 2026 JanSetu | Smart India Hackathon Project
+  </p>
+
+</footer>
+
+
+<script>
+
+const form = document.getElementById("problemForm");
+
+form.addEventListener("submit", function(event) {
+
+  event.preventDefault();
+
+  const title = document.getElementById("title").value;
+  const category = document.getElementById("category").value;
+  const location = document.getElementById("location").value;
+
+  alert(
+    "🎉 Problem Submitted Successfully!\n\n" +
+    "Title: " + title +
+    "\nCategory: " + category +
+    "\nLocation: " + location
+  );
+
+  form.reset();
+
+});
+
+</script>
+
+</body>
+</html>
